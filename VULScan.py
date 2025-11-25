@@ -11,7 +11,7 @@ def vulnScan(ip, ports):
         sys.stdout.write(f'\rScanning Port {port}')
         #print('Scanning Port', port)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as p:
-            p.settimeout(.1)
+            p.settimeout(.01)
             if p.connect_ex((ip,port)) == 0:
                 VPorts.append(port) 
         sys.stdout.flush
@@ -23,15 +23,17 @@ def getPrintScan(targetIP, targetPorts):
     if len(vulnPorts) == 0:
         print('There are no open ports')
     else:
-        print(vulnPorts)
+        for x in vulnPorts: 
+            print('\nport:', x)
+            name = socket.getservbyport(x)
+            print('protocol:', name)
 
 
 # common open ports according to chatgpt
 targetPorts = [21,22,23,25,53,80,110,139,143,443,445,587,993,995,1433,1521,2049,3306,3389,5900,8000,8080,8443]
-#targetPorts = range(1,300) 
+#targetPorts = range(4800,5200) 
 targetIP = '192.168.1.1'
 getPrintScan(targetIP, targetPorts)
-
 
 
 
