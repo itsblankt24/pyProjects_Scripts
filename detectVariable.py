@@ -45,3 +45,10 @@ def detect_output_type(value):
     # Catch-all for custom objects
     else:
         return f"Custom Object of type: {type(value).__name__}"
+
+def detectquick (value):
+    return type(value) 
+
+
+print(detectquick(19.23))
+print(detect_output_type(19.23))
