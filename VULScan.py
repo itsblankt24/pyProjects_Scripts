@@ -11,7 +11,7 @@ def vulnScan(ip, ports):
         sys.stdout.write(f'\rScanning Port {port}')
         #print('Scanning Port', port)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as p:
-            p.settimeout(.01)
+            p.settimeout(.5)
             if p.connect_ex((ip,port)) == 0:
                 VPorts.append(port) 
         sys.stdout.flush
