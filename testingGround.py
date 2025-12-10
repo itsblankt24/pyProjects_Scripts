@@ -1,7 +1,8 @@
-import socket
+import os
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as test:
-    test.settimeout(1)
-    name = socket.getservbyport(443)
-    print(f"Service for port 443: {name}")
-    print(name)
+print("does it remember variables")
+remember = "It remembers variables"
+rick = 10
+os.system('cls')
+print(rick )
+print(remember)
