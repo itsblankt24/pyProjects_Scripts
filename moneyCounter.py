@@ -1,6 +1,7 @@
 import os
-import sys
+#import sys
 
+#might be a good project to learn more about oop but lets get it working 
 #some public variables
 total_pen = 0.0
 total_nic = 0.0
@@ -18,6 +19,7 @@ total_amount = 0.0
 bal = 0.0
 status = True
 isFirst = True
+printBalance = 0.0
 
 #lets users input how many of each currency they have
 def getAmount(Type):
@@ -107,6 +109,7 @@ def balance():
     total_dol_amount = total_one + total_fiv + total_ten + total_twe + total_fif + total_hun
     bal = total_dol_amount + total_coin_amount
     print("Your total balance is: " + str(bal))  
+    return bal
 
 #amount in cash
 def cashAmount():
@@ -116,65 +119,66 @@ def cashAmount():
 def coinAmount():
     total_coin_amount = total_pen + total_nic + total_dim + total_qrt
 
-#allows for small changes to bal
-def changeBal():
-    print("What currency type would you like to change:")
-    print("1. Hundreds 2. Fifties 3. Twenties 4. Tens    5. Ones ")
-    try:
-        change = int(input("6. Quarters 7. Dimes   8. Nickels  9. Pennies 0. Special\n"))
-    except ValueError:
-        print('Invalid Input')
-        input('press Enter to continue')
-
-#Checks whether balance has been adjusted at all
-def isFirstCheck():
-    if isFirst == False:
-        print("Your balance is $" + str(bal))
-        print('What would you like to do now: ')
-    print('What would you like to do now: ')
-
 #includes the header of the terminal
-def pretext():
+def pretext(printBalance):
     os.system('cls')
     print('Press ctrl + C to exit at any time.') 
-    isFirstCheck()
+    print("Your balance is $" + str(printBalance))
+    #isFirstCheck()
 
-#In the works
-def reset():
-    status = False
-    python = r"\Python314\python.exe"
-    script_path = r"Users\natio\Desktop\Projects\pyProjects_Scripts"
-    os.execv(python, [python, script_path])
+#to simplify the continue button  
+def toContinue():
+    input('Press Enter to continue\n')
 
-#add back in later
-#def whatToDo():
-    
-
-while status == True:
-    pretext()
+#the input that determines task
+def taskPrompt():
     try:
         task = 0
         task = int(input('1. Balance  2. Take $150 out 3. Change Currency 4. Exit\n'))
     except ValueError:
         print('oops')
+    return task
+
+def performTask(task):
+    bal = 0.0
+    notStop = True
     if task == 1:
+        os.system('cls')
         bal = balance()
-        input('Press Enter to continue or ctrl + C to exit the program\n')
+        input('Press Enter to continue \nor ctrl + C to exit the program\n')
     elif task == 2:
-        print('To be done')
-        input('Press Enter to continue\n')
+        print('in the works')
+        toContinue()
     elif task == 3:
-        changeBal()
-        input('Press Enter to continue\n')
+        #changeBal()
+        print('To be done')
+        toContinue()
     elif task == 4:
         os.system('cls')
-        status = False
+        print("Shutting Down")
+        toContinue()
+        notStop = False
+        os.system('cls')
     else:
         print('Invalid Input Please Try Again')
-        input('Press Enter to continue\n')
-    isFirst = False
-    os.system('cls')
+        toContinue()
+    return notStop, bal
+     
+while status == True:
+    pretext(printBalance)
+    task = taskPrompt()
+    status, printBalance = performTask(task) 
 
+
+#In the works: A1 reset()
+
+#In the works: B1 whattodo()
+
+#to be continued: C1 isFirstCheck()
+
+#to be continued: D1 changeBalAction()
+
+#to be continued: E1 changeBal()
 
 #Current limitations 
 # 1. Amount can not exceed int digit limit (not a big worry)
